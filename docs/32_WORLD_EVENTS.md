@@ -1,13 +1,23 @@
 # 32 — WORLD EVENTS
 
-Les événements mondiaux doivent modifier temporairement les marchés.
+World events affect the shared game world and are distinct from purely personal quests.
 
-Exemples :
-- un genre devient tendance ;
-- un festival majeur ouvre des places ;
-- une plateforme lance une campagne ;
-- une ville devient un hotspot musical ;
-- une pénurie fictive augmente certains coûts ;
-- un nouveau marché devient plus accessible pendant une période.
+## Event evaluation
+An event is evaluated from:
+- calendar schedule;
+- market state;
+- player eligibility;
+- career grade;
+- reputation;
+- music trends;
+- prior participation;
+- active world conditions.
 
-Ces événements doivent être réversibles et équilibrés. Ils ne doivent pas casser la progression permanente.
+## Event lifecycle
+`Scheduled → Eligible → Active → Resolved → Recorded`
+
+## Global vs personal
+A global event can exist for everyone while generating different objectives and rewards per player.
+
+## Persistence
+Events use server time. There is no requirement for an offline simulation engine.

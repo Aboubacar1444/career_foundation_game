@@ -1,13 +1,20 @@
 # 14 — QUESTS
 
-## Quêtes principales
-Elles font progresser les grands arcs de carrière.
+## Main quests
+Main quests advance career arcs and unlock new professional possibilities.
 
-## Quêtes secondaires
-Elles enrichissent les relations, les marchés et les personnages.
+## Secondary quests
+Secondary quests add depth, relationships, money, skills, optional risks and alternative routes.
 
 ## Convergence
-Une quête secondaire peut devenir une branche de la quête principale si ses conséquences prennent de l'importance.
+Secondary quests can satisfy, modify or unlock objectives connected to a main quest. A side story may become strategically relevant to the main career arc.
 
-## Règle
-Les quêtes ne doivent pas former deux jeux séparés. Les secondaires doivent nourrir la progression principale par des personnes, ressources, compétences, réputation ou opportunités.
+## Example
+Main objective: "Establish yourself in the local rap scene."
+
+Possible secondary quests:
+- help a beatmaker finish a demo;
+- accept a small open mic;
+- resolve a dispute with another rapper.
+
+Any of these can influence relationships, skill growth, reputation or access to the main objective.

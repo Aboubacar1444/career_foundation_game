@@ -1,12 +1,25 @@
 # 12 — REPUTATION
 
-La réputation représente ce que le monde pense du joueur, distinct de sa popularité.
+Reputation represents current public/professional perception and is distinct from historical career experience.
 
-## Sources
-Musique, comportement, médias, contrats, relations, performances, polémiques, engagements professionnels.
+## Decline model
+Reputation can decline due to:
+- repeated poor performances;
+- public controversies;
+- failed commitments;
+- bad business decisions;
+- audience fatigue;
+- prolonged inactivity.
 
-## Mémoire
-Les événements importants doivent laisser une trace. Une mauvaise décision ancienne peut refaire surface plus tard.
+Decline affects opportunities but does not delete XP, certifications, historical releases or past achievements.
 
-## Comeback
-Le comeback consiste à rétablir progressivement crédibilité, audience et opportunités. Un ancien succès peut être un actif narratif sans garantir un retour immédiat au sommet.
+## Comeback model
+A comeback can involve:
+1. stabilization;
+2. repair;
+3. rebranding or reinvention;
+4. successful releases/performances;
+5. renewed audience trust;
+6. recovery of market opportunities.
+
+The comeback path should be harder than normal progression but meaningfully rewarding.

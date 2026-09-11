@@ -1,34 +1,82 @@
 # 29 — TIME SYSTEM
 
-## Objectif
-Créer un monde persistant sans transformer la durée en attente frustrante.
+## Decision
+The game uses **server-authoritative real time**. It does not run active gameplay simulation while the player is offline. Actions may represent long periods in the game world, but their interactive resolution is intentionally compressed.
 
-## Modèle : temps hybride
-Trois couches coexistent :
-1. temps réel du monde ;
-2. durée simulée des actions ;
-3. accélération contrôlée.
+## 1. Time model
+The system uses three layers:
 
-## Temps réel du monde
-Le serveur conserve une référence temporelle et fait avancer certains systèmes : streams, charts, marchés, contrats, tendances, événements et activités NPC.
+1. **Real-world clock** — authoritative server timestamp.
+2. **Game/calendar time** — weeks, seasons and scheduled events.
+3. **Action duration** — a simulated duration attached to an activity.
 
-## Durée simulée
-Une action possède une durée de simulation. Exemple : studio 4 h, concert 2 h 30, voyage 6 h, tournée 5 jours.
+An action is persisted with a start timestamp, a base duration and an effective duration after modifiers. The app does not need to remain open for the action to be valid, but the game does not perform a full offline simulation of the world's entities.
 
-Le joueur ne doit pas attendre autant devant son écran. L'action est résolue par étapes ou au prochain état pertinent.
+## 2. Progressive time scale
+Early-career actions are intentionally short. As professional responsibility grows, projects represent longer periods of work.
 
-## Accélération
-Une action peut être accélérée par :
-- accélérateurs gagnés en jeu ;
-- ressources gratuites ;
-- améliorations de bâtiment/équipement ;
-- premium, dans des limites d'équilibrage.
+Examples:
+- battle / interview: minutes;
+- small recording session: minutes to a few hours;
+- major release campaign: hours to days;
+- national tour: several days;
+- international project / world tour: weeks.
 
-## Règle d'engagement
-L'accélération payante ou gagnée réduit le temps d'une action ; elle ne supprime pas les prérequis structurels d'une carrière.
+The player should experience the consequences of long activities without having to watch a timer continuously.
 
-## Hors connexion
-À la reconnexion, le serveur calcule ce qui s'est passé depuis le dernier état connu et affiche un résumé : revenus, streams, variations de charts, événements, messages et actions qui nécessitent une décision.
+## 3. Fast resolution
+Long activities are resolved through a short interactive sequence rather than a minute-by-minute simulation.
 
-## Temps critique
-Certaines échéances peuvent utiliser une fenêtre réelle : appel média, négociation, mise en vente, événement hebdomadaire. Une absence ne doit cependant pas rendre une carrière irrécupérable.
+Example — concert:
+
+`Preparation → Performance → Key moment(s) → Result`
+
+A concert may represent 2–4 real-world hours in the game calendar, while the interactive resolution can take seconds.
+
+The amount of interactive detail can depend on the activity, available quests/objectives and the player's use of speeders.
+
+## 4. Speeders
+Three sources are supported:
+
+- **Earned speeders:** quests, achievements, weekly/world events and progression rewards.
+- **Gameplay speeders:** better staff, equipment, facilities or management capabilities.
+- **Premium speeders:** purchasable accelerators.
+
+A speeder changes the effective completion timestamp of the action. It does not bypass career requirements, unlocks or eligibility rules.
+
+## 5. World consistency when speeding
+Speeding up an action does **not** create a separate timeline for the player.
+
+The shared world remains governed by the same server clock. Markets, NPCs, rankings, scheduled events and other global systems are evaluated according to that clock; they are **not** required to be simulated minute-by-minute while an action is running.
+
+When an action completes, the server evaluates the valid world state at that completion timestamp and resolves the action against it.
+
+Example:
+
+A national tour normally takes 5 game-days. A speeder reduces it to 2 game-days.
+
+- The player's tour resolves at the earlier timestamp.
+- Rankings, market conditions and scheduled events use the state applicable at that earlier timestamp.
+- There is no private 5-day simulation running for this player.
+- The player therefore receives the consequences of finishing earlier, including potentially different market conditions or event eligibility.
+
+This keeps acceleration meaningful while preserving a single consistent world clock.
+
+## 6. Offline return
+When the player returns after an absence, the server reconciles only what is necessary from persisted actions, deadlines and scheduled systems. It does not replay an entire artificial world history tick by tick.
+
+An absence must never silently create an unrecoverable career failure.
+
+## 7. Weekly events
+Weekly events are scheduled by server time. Their existence is predictable, while their content, objectives and opponents are adaptive.
+
+The weekly calendar is fixed, but participation and progression are not tied to constant attendance. Recovery mechanisms are defined in `30_WEEKLY_EVENTS.md`.
+
+## 8. Anti-FOMO
+The system avoids:
+- irreversible punishment for absence;
+- mandatory daily attendance;
+- rewards that require constant monitoring;
+- deadlines that destroy long-term progression.
+
+Participation can provide advantages, but missing a window must not invalidate a career.
