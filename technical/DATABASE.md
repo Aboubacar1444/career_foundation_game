@@ -1,3 +1,4 @@
+
 # DATABASE — FOUNDATION MODEL V0
 
 PostgreSQL is the source of truth for persistent game state.
